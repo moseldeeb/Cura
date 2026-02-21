@@ -4,7 +4,7 @@ namespace Cura.Models
 {
     public class Patient
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string FName { get; set; }
         public string LName { get; set; }
         public string GOV { get; set; }
@@ -15,5 +15,6 @@ namespace Cura.Models
         public string Phone { get; set; }
         public DateTime BirthDate { get; set; }
         public BinaryData gender { get; set; }
+        public List<Appointment> Appointments { get; set; }
     }
 }

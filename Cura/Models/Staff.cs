@@ -4,7 +4,7 @@ namespace Cura.Models
 {
     public class Staff
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string FName { get; set; }
         public string LName { get; set; }
         public string Receptionist { get; set; }
@@ -16,5 +16,8 @@ namespace Cura.Models
         public string Phone { get; set; }
         public DateTime HireDate { get; set; }
         public SqlMoney Salary { get; set; }
+        public string ClinicId { get; set; }
+        public Clinic Clinic { get; set; }
+        public List<Appointment> Appointments { get; set; }
     }
 }

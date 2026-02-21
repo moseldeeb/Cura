@@ -1,4 +1,9 @@
-namespace Cura
+using Ecommerce.Configurations;
+using Ecommerce.Utilities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
+
+namespace Ecommerce
 {
     public class Program
     {
@@ -8,8 +13,23 @@ namespace Cura
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            var connectionString =
+                builder.Configuration.GetConnectionString("DefaultConnection")
+                    ?? throw new InvalidOperationException("Connection string"
+                    + "'DefaultConnection' not found.");
+
+            //AppConfiguration.Config(builder.Services, connectionString);
+
+            builder.Services.Config(connectionString);
+            builder.Services.RegisterMapsterConfig();
 
             var app = builder.Build();
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var dbInitializr = scope.ServiceProvider.GetRequiredService<IDBInitializr>();
+                dbInitializr.Initialize();
+            }
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
@@ -27,7 +47,7 @@ namespace Cura
             app.MapStaticAssets();
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}")
+                pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}")
                 .WithStaticAssets();
 
             app.Run();
