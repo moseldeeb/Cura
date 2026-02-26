@@ -10,9 +10,8 @@ namespace Cura.Models
         public string Receptionist { get; set; }
         public string Nurse { get; set; }
         public string Cleaner { get; set; }
-
-        public string email { get; set; }
-        public string Countrycode { get; set; }
+        public string Email { get; set; }
+        public string CountryCode { get; set; }
         public string Phone { get; set; }
         public DateTime HireDate { get; set; }
         public SqlMoney Salary { get; set; }
